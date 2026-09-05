@@ -1,0 +1,19 @@
+<template>
+  <div class="page">
+    <section class="hero"><div class="container hero-inner"><div><div class="eyebrow">VORA ELECTRICAL</div><h1 class="h1">Power your system.<br/><i>Precisely.</i></h1><p>Electrical devices and components selected for reliable, modern installations.</p><div class="hero-actions"><RouterLink class="btn accent" to="/shop">Shop products <ArrowUpRight :size="17"/></RouterLink><RouterLink class="btn secondary" to="/category/protection">Explore protection</RouterLink></div></div><div class="hero-art"><div class="art-label">ENGINEERED<br/>FOR EVERY DAY</div></div></div></section>
+    <section class="section"><div class="container"><div class="section-head"><div><div class="eyebrow">Shop by category</div><h2 class="h2">Built around the system.</h2></div><RouterLink to="/shop">View all <ArrowUpRight :size="16"/></RouterLink></div><div class="category-grid"><RouterLink v-for="c in categories" :key="c.name" :to="`/category/${c.slug}`" class="category-card"><div><span>{{c.number}}</span><h3>{{c.name}}</h3></div><ArrowUpRight/></RouterLink></div></div></section>
+    <section class="section muted-bg"><div class="container"><div class="section-head"><div><div class="eyebrow">Featured</div><h2 class="h2">Selected essentials.</h2></div><RouterLink to="/shop">Shop all</RouterLink></div><div class="product-grid"><ProductCard v-for="p in products.slice(0,4)" :key="p.id" :product="p" @add="cart.add(p)"/></div></div></section>
+  </div>
+</template>
+<script setup lang="ts">
+import { ArrowUpRight } from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
+import ProductCard from '../components/commerce/ProductCard.vue'
+import { products } from '../services/mock'
+import { useCartStore } from '../stores/cart'
+const cart=useCartStore()
+const categories=[{number:'01',name:'Lighting',slug:'lighting'},{number:'02',name:'Protection',slug:'protection'},{number:'03',name:'Switchgear',slug:'switchgear'},{number:'04',name:'Meters',slug:'meters'}]
+</script>
+<style scoped>
+.hero{background:#111;color:#fff;min-height:600px;display:flex;align-items:center}.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}.hero p{color:#c9c9c9;max-width:490px;line-height:1.7;font-size:16px}.hero-actions{display:flex;gap:12px;margin-top:30px}.hero-art{min-height:430px;border-radius:28px;background:linear-gradient(135deg,#333,#111);position:relative;overflow:hidden}.hero-art:after{content:'';position:absolute;width:70%;height:70%;right:-10%;top:15%;border-radius:50%;border:1px solid #666;box-shadow:0 0 0 30px #ffffff08,0 0 0 70px #ffffff05}.art-label{position:absolute;bottom:22px;left:24px;font-size:11px;letter-spacing:.16em;color:#aaa}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.section-head>a{display:flex;align-items:center;gap:4px;font-weight:600}.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.category-card{min-height:210px;padding:20px;border:1px solid var(--vora-line);border-radius:16px;display:flex;flex-direction:column;justify-content:space-between;transition:.2s}.category-card:hover{background:#111;color:#fff}.category-card span{font-size:11px;color:var(--vora-muted)}.category-card h3{font-size:25px;margin:70px 0 0}.category-card>svg{align-self:flex-end}.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.muted-bg{background:#f6f6f4}@media(max-width:900px){.hero-inner{grid-template-columns:1fr}.hero-art{min-height:300px}.category-grid,.product-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.hero{min-height:auto;padding:70px 0}.hero-art{display:none}.hero-actions{flex-direction:column}.category-grid,.product-grid{grid-template-columns:1fr 1fr}.category-card{min-height:170px}.category-card h3{font-size:19px;margin-top:50px}}
+</style>

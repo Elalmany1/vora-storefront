@@ -1,0 +1,1 @@
+<template><div class="page"><div class="container"><div class="eyebrow">ACCOUNT / ORDERS</div><h1 class="h1">Orders.</h1><div class="empty">Orders will appear here once the backend is connected.</div></div></div></template><script setup lang="ts"></script>
